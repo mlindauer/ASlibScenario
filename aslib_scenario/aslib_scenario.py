@@ -118,6 +118,7 @@ class ASlibScenario(object):
 
         self.feature_data = pd.read_csv(feat_fn, index_col=0)
         self.performance_data = pd.read_csv(perf_fn, index_col=0)
+        self.performance_data_all = [self.performance_data]
 
         self.algorithms = list(
             self.performance_data.columns)  # list of strings
