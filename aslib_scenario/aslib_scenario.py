@@ -496,6 +496,7 @@ class ASlibScenario(object):
         duplicates = self.feature_data.duplicated().sum()
         if duplicates > 0:
             self.logger.warn("Found %d duplicated feature vectors" %(duplicates))
+            self.logger.warn(self.feature_data[self.feature_data.duplicated(keep=False)].index)
 
     def read_feature_costs(self, fn):
         '''
