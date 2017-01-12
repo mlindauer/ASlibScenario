@@ -283,6 +283,8 @@ class ASlibScenario(object):
         if (not self.algorithm_cutoff_time or self.algorithm_cutoff_time == "?") and (self.performance_type == "quality"):
             self.logger.error("Have not found algorithm_cutoff_time")
             error_found = True
+        elif self.algorithm_cutoff_time == "?":
+            self.algorithm_cutoff_time = None
         if not self.feature_group_dict:
             self.logger.error("Have not found any feature step")
             error_found = True
