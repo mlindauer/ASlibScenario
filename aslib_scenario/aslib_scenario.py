@@ -700,6 +700,10 @@ class ASlibScenario(object):
 
         for perf_type_i, perf_type in enumerate(self.performance_type):
 
+            if pd.isnull(self.performance_data_all[perf_type_i]).sum().sum() > 0:
+                self.logger.error("Performance data cannot have missing entries")
+                sys.exit(3)
+
             if perf_type == "runtime" and self.maximize[perf_type_i]:
                 self.logger.error("Maximizing runtime is not supported")
                 sys.exit(3)
