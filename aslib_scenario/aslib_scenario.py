@@ -88,7 +88,12 @@ class ASlibScenario(object):
 
         return state_dict
 
-    def read_from_csv(self, perf_fn: str, feat_fn: str, objective: str, runtime_cutoff: float, maximize: bool):
+    def read_from_csv(self, perf_fn: str, 
+                      feat_fn: str, 
+                      objective: str, 
+                      runtime_cutoff: float, 
+                      maximize: bool,
+                      cv_fn: str=None):
         '''
             create an internal ASlib scenario from csv
 
@@ -104,6 +109,8 @@ class ASlibScenario(object):
                 maximal runtime cutoff
             maximize: bool
                 whether to maximize or minimize the objective values
+            cv_fn: str
+                cv split file in csv format
         '''
 
         self.scenario = None  # string
@@ -155,7 +162,10 @@ class ASlibScenario(object):
         self.features = self.features_deterministic
         self.ground_truths = {}  # type -> [values]
 
-        self.create_cv_splits()
+        if cv_fn:
+            self.cv_data = pd.read_csv(cv_fn, index_col=0)
+        else:
+            self.create_cv_splits()
 
         if self.CHECK_VALID:
             self.check_data()
