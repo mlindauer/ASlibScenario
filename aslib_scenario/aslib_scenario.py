@@ -270,8 +270,12 @@ class ASlibScenario(object):
             if d.get("requires") and not isinstance(d["requires"], list):
                 self.feature_group_dict[step]["requires"] = [d["requires"]]
 
-        self.algorithms = list(description.get("metainfo_algorithms").keys())
-        # TODO: read whether an algorithm is deterministic or stochastic
+        for algo, meta_data in description.get("metainfo_algorithms").items():
+            self.algorithms.append(algo)
+            if meta_data["determinisitic"]:
+                self.algortihms_deterministics.append(algo)
+            else:
+                self.algorithms_stochastic.append(algo)
 
         # if algorithms as numerical IDs, yaml interprets them as integers and
         # not as string
