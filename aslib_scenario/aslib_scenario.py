@@ -272,7 +272,7 @@ class ASlibScenario(object):
 
         for algo, meta_data in description.get("metainfo_algorithms").items():
             self.algorithms.append(algo)
-            if meta_data["determinisitic"]:
+            if meta_data["deterministic"]:
                 self.algortihms_deterministics.append(algo)
             else:
                 self.algorithms_stochastic.append(algo)
