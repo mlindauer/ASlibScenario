@@ -7,7 +7,7 @@ import arff  # liac-arff
 import copy
 import collections
 
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 import pandas as pd
 import numpy as np
 
@@ -834,11 +834,11 @@ class ASlibScenario(object):
                 number of splits
         '''
 
-        kf = KFold(len(self.instances), n_folds=n_folds, shuffle=True)
+        kf = KFold(n_splits=n_folds, shuffle=True)
         self.cv_data = pd.DataFrame(
             data=np.zeros(len(self.instances)), index=self.instances, columns=["fold"], dtype=np.float)
-
-        for indx, (train, test) in enumerate(kf):
+        
+        for indx, (train, test) in enumerate(kf.split(self.instances)):
             # print(self.cv_data.loc(np.array(self.instances[test]).tolist()))
             self.cv_data.iloc[test] = indx + 1.
 
