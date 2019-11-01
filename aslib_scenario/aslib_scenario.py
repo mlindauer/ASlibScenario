@@ -232,7 +232,7 @@ class ASlibScenario(object):
         self.logger.info("Read %s" % (fn))
 
         with open(fn, "r") as fh:
-            description = yaml.load(fh)
+            description = yaml.load(fh, Loader=yaml.SafeLoader)
 
         self.scenario = description.get('scenario_id')
         self.performance_measure = description.get('performance_measures')
