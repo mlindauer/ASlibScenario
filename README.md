@@ -23,9 +23,9 @@ To install all requirements, please run:
 
 ### Input Formats 
 
-ASlibScenario reads two input formats: CSV and [ASlib](www.aslib.net).
+ASlibScenario reads two input formats: CSV and [ASlib](https://www.aslib.net).
 The CSV format is easier for new users but has some limitations to express all kind of input data.
-The ASlib format has a higher expressiveness -- please see [www.aslib.net](www.aslib.net) for all details on this input format.
+The ASlib format has a higher expressiveness -- please see [www.aslib.net](https://www.aslib.net) for all details on this input format.
 
 For the CSV format, simply two files are required.
 One file with the performance data of each algorithm on each instance (each row an instance, and each column an algorithm).
