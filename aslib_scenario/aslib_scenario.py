@@ -406,7 +406,7 @@ class ASlibScenario(object):
         # group performance data by mean value across repetitions
         for perf in self.performance_measure:
             self.performance_data_all.append(
-                perf_data.groupby(['instance_id', 'algorithm']).median().unstack(
+                perf_data.groupby(['instance_id', 'algorithm']).median(numeric_only=True).unstack(
                     'algorithm')[perf]
             )
 
@@ -559,7 +559,7 @@ class ASlibScenario(object):
         data = np.array(arff_dict["data"])
         cols = list(map(lambda x: x[0], arff_dict["attributes"][1:]))
         imputed_feature_cost_data = pd.DataFrame(
-            data[:,1:], columns=cols, dtype=np.float)
+            data[:,1:], columns=cols, dtype=np.float64)
         
         # imputation has to be before the grouping
         imputed_feature_cost_data[pd.isnull(imputed_feature_cost_data)] = 0
@@ -701,7 +701,7 @@ class ASlibScenario(object):
         data = np.array(arff_dict["data"])
         cols = list(map(lambda x: x[0], arff_dict["attributes"][1:]))
         self.cv_data = pd.DataFrame(
-            data[:, 1:], index=data[:, 0], columns=cols, dtype=np.float)
+            data[:, 1:], index=data[:, 0], columns=cols, dtype=np.float64)
         # use only first cv repetitions
         self.cv_data = self.cv_data[self.cv_data["repetition"] == 1]
         self.cv_data = self.cv_data.drop("repetition", axis=1)
@@ -836,7 +836,7 @@ class ASlibScenario(object):
 
         kf = KFold(n_splits=n_folds, shuffle=True)
         self.cv_data = pd.DataFrame(
-            data=np.zeros(len(self.instances)), index=self.instances, columns=["fold"], dtype=np.float)
+            data=np.zeros(len(self.instances)), index=self.instances, columns=["fold"], dtype=np.float64)
         
         for indx, (train, test) in enumerate(kf.split(self.instances)):
             # print(self.cv_data.loc(np.array(self.instances[test]).tolist()))
